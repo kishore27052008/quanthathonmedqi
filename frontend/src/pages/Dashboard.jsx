@@ -18,6 +18,7 @@ export default function Dashboard() {
   const { activeDomain } = useDomain();
   const [summary, setSummary] = useState(null);
   const [recentAssessments, setRecentAssessments] = useState([]);
+  const [overallAnalysis, setOverallAnalysis] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchDashboardData = async () => {
@@ -26,6 +27,12 @@ export default function Dashboard() {
       // Fetch summary statistics
       const summaryRes = await api.get('/dashboard/summary').catch(() => null);
       
+      // Fetch overall multi-disease analysis
+      const overallRes = await api.post('/overall/analyze', {}).catch(() => null);
+      if (overallRes?.data) {
+        setOverallAnalysis(overallRes.data);
+      }
+
       // Fetch recent high risk assessments / history
       const historyRes = await api.get(`/${activeDomain.id}/history/all`).catch(async () => {
         return api.get('/dashboard/high-risk-patients').catch(() => ({ data: [] }));
@@ -162,6 +169,79 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      {/* Multi-Disease Integrated Risk & Quantum QAOA Pathway Card */}
+      {overallAnalysis && (
+        <div className="bg-[#0F172A] rounded-2xl border border-slate-800/80 p-6 shadow-sm">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-slate-800 gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-brand-500/20 text-brand-300 border border-brand-500/30 uppercase tracking-wider">
+                  Quantum Multi-Disease Graph Engine
+                </span>
+                <span className="text-xs text-slate-400 font-mono">QAOA Quantum Optimizer</span>
+              </div>
+              <h2 className="text-lg font-bold text-white mt-1">Cross-Disease Pathway Analysis</h2>
+            </div>
+            <div className="flex items-center gap-4 bg-slate-900/80 px-4 py-2 rounded-xl border border-slate-800">
+              <span className="text-xs text-slate-400 font-medium">Integrated Risk Score:</span>
+              <span className="text-xl font-black text-amber-400 font-mono">
+                {overallAnalysis.integrated_risk_score !== undefined
+                  ? `${overallAnalysis.integrated_risk_score.toFixed(1)}%`
+                  : 'N/A'}
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-5">
+            {/* Posteriors Column */}
+            <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-800/60">
+              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Disease Posteriors</h3>
+              <div className="space-y-2">
+                {overallAnalysis.posteriors &&
+                  Object.entries(overallAnalysis.posteriors).map(([dis, val]) => (
+                    <div key={dis} className="flex items-center justify-between text-xs">
+                      <span className="font-semibold text-slate-300 uppercase font-mono">{dis}</span>
+                      <span className="font-mono text-white font-bold">{(val * 100).toFixed(1)}%</span>
+                    </div>
+                  ))}
+              </div>
+            </div>
+
+            {/* Quantum Optimization Column */}
+            <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-800/60">
+              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Quantum Pathway QAOA</h3>
+              <p className="text-[11px] text-slate-400 font-mono leading-relaxed">
+                {overallAnalysis.quantum_pathway_analysis?.bitstring_interpretation ||
+                  'QAOA quantum optimizer executed pathway optimization across disease interaction graphs.'}
+              </p>
+              {overallAnalysis.quantum_pathway_analysis?.dominant_bitstring && (
+                <div className="mt-3 pt-2 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+                  <span className="text-slate-400">Optimal Bitstring:</span>
+                  <span className="text-emerald-400 font-bold">{overallAnalysis.quantum_pathway_analysis.dominant_bitstring}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Recommendations Column */}
+            <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-800/60">
+              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Preventive Pathway Recommendations</h3>
+              <ul className="space-y-2">
+                {overallAnalysis.recommendations && overallAnalysis.recommendations.length > 0 ? (
+                  overallAnalysis.recommendations.slice(0, 3).map((rec, i) => (
+                    <li key={i} className="text-[11px] text-slate-300 flex items-start gap-2">
+                      <span className="text-brand-400 font-bold">•</span>
+                      <span>{typeof rec === 'object' ? rec.text || rec.title || JSON.stringify(rec) : rec}</span>
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-[11px] text-slate-400">Standard clinical follow-up protocol.</li>
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Grid: Recent Predictions (~60%) & Risk Distribution (~40%) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

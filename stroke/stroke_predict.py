@@ -5,8 +5,11 @@ stroke_dir = os.path.dirname(os.path.abspath(__file__))
 if stroke_dir not in sys.path:
     sys.path.append(stroke_dir)
 
-from predict import predict_stroke_risk, load_artifacts, generate_recommendations, format_prediction_output
-from predict_quantum import predict_stroke_risk_quantum
+from .predict import predict_stroke_risk, load_artifacts, generate_recommendations, format_prediction_output
+try:
+    from .predict_quantum import predict_stroke_risk_quantum
+except Exception:
+    predict_stroke_risk_quantum = None
 
 __all__ = [
     "predict_stroke_risk",

@@ -126,46 +126,95 @@ def _normalize_features(domain: str, features: dict) -> dict:
     return features
 
 
+import sys, os
+from pathlib import Path
+ROOT_DIR = Path(__file__).resolve().parents[3]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+import numpy
+sys.modules['numpy._core'] = numpy.core
+sys.modules['numpy._core.numeric'] = numpy.core.numeric
+sys.modules['numpy._core.multiarray'] = numpy.core.multiarray
+sys.modules['numpy._core._multiarray_umath'] = numpy.core._multiarray_umath
+
+from cad.cad_predict import predict_heart_disease_risk
+from ckd.ckd_predict import predict_ckd_risk
+from stroke.stroke_predict import predict_stroke_risk
+
+
 def predict_risk(db: Session, domain: str, patient_id: Union[int, str], features: dict) -> RiskAssessment:
     # Ensure patient is mapped or created in database first
     patient = _get_or_create_patient(db, patient_id, features)
+    domain_clean = domain.lower().strip()
+
+    prob_val = 0.0
+    risk_score = 0.0
+    pred_class = 0
+    level = "Low Risk"
+    model_version = "v1.0-quantum"
+    shap_result = None
 
     try:
-        model = load_model(domain)
-        expected = get_expected_features(domain)
-        ordered_row = _normalize_features(domain, features)
+        if domain_clean in ["cad", "coronary_heart_disease", "heart_disease"]:
+            res_cad = predict_heart_disease_risk(features)
+            prob_val = float(res_cad.get("probability", 0.0))
+            risk_score = float(res_cad.get("cad_risk_percentage", round(prob_val * 100, 2)))
+            pred_class = int(prob_val >= 0.5)
+            level = res_cad.get("risk_category", _risk_level(risk_score))
+            model_version = "v1.0-xgboost"
 
-        if expected:
-            ordered_row = {k: ordered_row.get(k, 0.0) for k in expected}
+        elif domain_clean in ["ckd", "chronic_kidney_disease"]:
+            res_ckd = predict_ckd_risk(features)
+            prob_val = float(res_ckd.get("probability_ckd", 0.0))
+            risk_score = float(res_ckd.get("risk_percentage", round(prob_val * 100, 2)))
+            pred_class = int(prob_val >= 0.5)
+            level = res_ckd.get("risk_category", _risk_level(risk_score))
+            model_version = "v1.0-xgboost"
 
-        X = pd.DataFrame([ordered_row])
+        elif domain_clean in ["stroke", "stroke_risk"]:
+            res_stroke = predict_stroke_risk(features)
+            prob_val = float(res_stroke.get("probability", 0.0))
+            risk_score = float(res_stroke.get("stroke_risk_percentage", round(prob_val * 100, 2)))
+            pred_class = int(prob_val >= 0.5)
+            level = res_stroke.get("risk_category", _risk_level(risk_score))
+            model_version = "v1.0-xgboost"
 
-        if hasattr(model, "predict_proba"):
-            proba = model.predict_proba(X)[0]
-            prob_val = float(proba[1] if len(proba) > 1 else proba[0])
         else:
-            prob_val = float(model.predict(X)[0])
+            model = load_model(domain)
+            expected = get_expected_features(domain)
+            ordered_row = _normalize_features(domain, features)
 
-        pred_class = int(prob_val >= 0.5)
-        risk_score = round(prob_val * 100, 2)
-        try:
-            shap_result = explain_prediction(model, ordered_row)
-        except Exception:
-            shap_result = None
+            if expected:
+                ordered_row = {k: ordered_row.get(k, 0.0) for k in expected}
 
-        model_version = getattr(model, "version", "v1.0-quantum")
+            X = pd.DataFrame([ordered_row])
+
+            if hasattr(model, "predict_proba"):
+                proba = model.predict_proba(X)[0]
+                prob_val = float(proba[1] if len(proba) > 1 else proba[0])
+            else:
+                prob_val = float(model.predict(X)[0])
+
+            pred_class = int(prob_val >= 0.5)
+            risk_score = round(prob_val * 100, 2)
+            try:
+                shap_result = explain_prediction(model, ordered_row)
+            except Exception:
+                shap_result = None
+
+            model_version = getattr(model, "version", "v1.0-quantum")
+            level = _risk_level(risk_score)
 
     except Exception as e:
         # Graceful fallback if error occurs
-        systolic = _to_float(features.get("systolic_bp"), 120)
-        wbc = _to_float(features.get("white_blood_cells"), 8)
-        prob_val = 0.845 if systolic > 140 or wbc > 12 else 0.182
+        systolic = _to_float(features.get("systolic_bp") or features.get("trestbps") or features.get("bp"), 120)
+        age = _to_float(features.get("age") or features.get("Age"), 45)
+        prob_val = 0.725 if (systolic > 140 or age > 60) else 0.150
         pred_class = int(prob_val >= 0.5)
         risk_score = round(prob_val * 100, 2)
-        shap_result = None
+        level = _risk_level(risk_score)
         model_version = "v1.0-fallback"
-
-    level = _risk_level(risk_score)
 
     assessment = RiskAssessment(
         patient_id=patient.id,

@@ -8,10 +8,7 @@ if ckd_dir not in sys.path:
 if src_dir not in sys.path:
     sys.path.append(src_dir)
 
-try:
-    from CKD.src.predict import predict_ckd_risk, load_artifacts, get_risk_category
-except ModuleNotFoundError:
-    from src.predict import predict_ckd_risk, load_artifacts, get_risk_category
+from .src.predict import predict_ckd_risk, load_artifacts, get_risk_category
 
 __all__ = ["predict_ckd_risk", "load_artifacts", "get_risk_category"]
 

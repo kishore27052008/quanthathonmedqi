@@ -1,3 +1,10 @@
+import sys, os
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -28,11 +35,47 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from fastapi import Request, status
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
 from app.api.v1.endpoints.predict import router as predict_router
 from app.ml.model_loader import preload_models
 
 app.include_router(api_router, prefix="/api/v1")
 app.include_router(predict_router)
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request: Request, exc: StarletteHTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail, "status_code": exc.status_code},
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "detail": "Request validation error",
+            "errors": exc.errors(),
+            "status_code": 422,
+        },
+    )
+
+
+@app.exception_handler(Exception)
+async def generic_exception_handler(request: Request, exc: Exception):
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "detail": "An internal server error occurred.",
+            "status_code": 500,
+        },
+    )
 
 
 @app.on_event("startup")
@@ -56,5 +99,6 @@ def root():
 
 
 @app.get("/health")
+@app.get("/api/v1/health")
 def health_check():
-    return {"status": "healthy"}
+    return {"status": "healthy", "service": settings.APP_NAME}
