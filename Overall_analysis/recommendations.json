@@ -1,0 +1,131 @@
+{
+  "pathway_recommendations": {
+    "gdm->cad": {
+      "title": "GDM to CAD Metabolic Risk Management",
+      "pathway": "GDM -> CAD",
+      "mechanism": "Metabolic Syndrome / Insulin Resistance Pathway",
+      "recommendations": [
+        "Schedule postpartum Oral Glucose Tolerance Test (OGTT) at 6-12 weeks after delivery.",
+        "Perform annual fasting lipid panel, HbA1c, and blood pressure monitoring.",
+        "Implement low-glycemic dietary planning and 150 min/week moderate aerobic exercise.",
+        "Consult Cardiology for early cardiovascular risk assessment if dyslipidemia or hypertension develops."
+      ]
+    },
+    "gdm->ckd": {
+      "title": "GDM to CKD Renal Microvascular Protection",
+      "pathway": "GDM -> CKD",
+      "mechanism": "Hyperglycemic Renal Vascular Damage Pathway",
+      "recommendations": [
+        "Order annual urine albumin-to-creatinine ratio (uACR) and estimated GFR (eGFR) screenings.",
+        "Maintain strict glycemic targets (HbA1c < 6.5%) to prevent renal microvascular injury.",
+        "Screen early for signs of diabetic kidney disease."
+      ]
+    },
+    "preeclampsia->cad": {
+      "title": "Preeclampsia Postpartum Cardiovascular Screening",
+      "pathway": "Preeclampsia -> CAD",
+      "mechanism": "Endothelial Dysfunction & Vascular Remodeling",
+      "recommendations": [
+        "Establish lifetime cardiovascular risk tracking following a hypertensive disorder of pregnancy.",
+        "Monitor blood pressure, fasting lipids, and glucose every 6-12 months postpartum.",
+        "Consider non-invasive coronary imaging or Calcium Scoring (CAC) in mid-life."
+      ]
+    },
+    "preeclampsia->stroke": {
+      "title": "Preeclampsia Cerebrovascular Risk Reduction",
+      "pathway": "Preeclampsia -> Stroke",
+      "mechanism": "Cerebrovascular Endothelial Damage & Acute Hypertension",
+      "recommendations": [
+        "Enforce strict blood pressure control (target < 130/80 mmHg).",
+        "Educate patient on warning signs of acute cerebrovascular events (FAST protocol).",
+        "Evaluate for persistent postpartum hypertensive vascular dysfunction."
+      ]
+    },
+    "preeclampsia->ckd": {
+      "title": "Preeclampsia Postpartum Renal Injury Prevention",
+      "pathway": "Preeclampsia -> CKD",
+      "mechanism": "Post-partum Renal Microvascular Injury",
+      "recommendations": [
+        "Check spot urine protein-to-creatinine ratio postpartum until protein excretion normalizes.",
+        "Monitor serum creatinine and eGFR at 3 and 6 months post-delivery."
+      ]
+    },
+    "ckd->cad": {
+      "title": "Cardiorenal Risk Reduction (CKD -> CAD)",
+      "pathway": "CKD -> CAD",
+      "mechanism": "Cardiorenal Syndrome Type 4",
+      "recommendations": [
+        "Co-manage patient care with Nephrology and Cardiology specialist teams.",
+        "Monitor calcium-phosphate product and vascular calcification markers.",
+        "Optimize blood pressure management with RAAS inhibitors (ACEi/ARB) as clinically indicated."
+      ]
+    },
+    "cad->ckd": {
+      "title": "Cardiorenal Perfusion Protection (CAD -> CKD)",
+      "pathway": "CAD -> CKD",
+      "mechanism": "Cardiorenal Syndrome Type 1/2",
+      "recommendations": [
+        "Avoid nephrotoxic agents (e.g., NSAIDs, iodinated contrast) where possible.",
+        "Optimize cardiac output and hemodynamics to preserve renal perfusion."
+      ]
+    },
+    "cad->stroke": {
+      "title": "Atherosclerotic Cerebrovascular Protection (CAD -> Stroke)",
+      "pathway": "CAD -> Stroke",
+      "mechanism": "Shared Atherosclerotic Vascular Risk & Thromboembolism",
+      "recommendations": [
+        "Initiate guideline-directed statin and antiplatelet therapy.",
+        "Screen for carotid artery stenosis and atrial fibrillation."
+      ]
+    },
+    "stroke->cad": {
+      "title": "Systemic Atherothrombotic Management (Stroke -> CAD)",
+      "pathway": "Stroke -> CAD",
+      "mechanism": "Shared Systemic Atherothrombotic Disease",
+      "recommendations": [
+        "Perform baseline ECG and echocardiogram to evaluate silent coronary artery disease.",
+        "Optimize systemic vascular risk factors including BP and LDL cholesterol."
+      ]
+    },
+    "gdm->preeclampsia": {
+      "title": "Gestational Vascular & Placental Stress Monitoring",
+      "pathway": "GDM -> Preeclampsia",
+      "mechanism": "Shared Pregnancy Metabolic-Vascular Risk Factors",
+      "recommendations": [
+        "Initiate low-dose aspirin (81-150 mg/day) starting at 12 weeks gestation if indicated.",
+        "Frequent antenatal monitoring of blood pressure, urine protein, and fetal growth."
+      ]
+    },
+    "preeclampsia->gdm": {
+      "title": "Gestational Placental-Metabolic Monitoring",
+      "pathway": "Preeclampsia -> GDM",
+      "mechanism": "Shared Gestational Placental-Metabolic Stress",
+      "recommendations": [
+        "Perform early 24-28 week glucose tolerance screening during current or future pregnancies.",
+        "Monitor nutritional intake and maternal weight gain trajectory."
+      ]
+    }
+  },
+  "high_risk_disease_recommendations": {
+    "gdm": [
+      "Follow diabetic pregnancy management guidelines with endocrinology care.",
+      "Monitor blood glucose levels 4 times daily (fasting and 1-hr postprandial)."
+    ],
+    "preeclampsia": [
+      "Urgent obstetrical evaluation for signs of preeclampsia with severe features.",
+      "Assess lab parameters (platelets, liver enzymes, serum creatinine)."
+    ],
+    "stroke": [
+      "Immediate neurological risk evaluation and brain/carotid vascular imaging if symptomatic.",
+      "Strict BP control and stroke prevention protocol."
+    ],
+    "ckd": [
+      "Nephrology consultation for staging and nephroprotective management.",
+      "Strict BP target (< 120/80 mmHg if proteinuria present) and dietary sodium restriction."
+    ],
+    "cad": [
+      "Cardiology consultation, diagnostic stress testing, or coronary angiography as indicated.",
+      "Lifestyle modification and anti-ischemic medical therapy."
+    ]
+  }
+}

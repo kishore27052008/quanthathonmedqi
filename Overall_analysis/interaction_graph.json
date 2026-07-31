@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "description": "Directed clinical interaction graph connecting GDM, Preeclampsia, Stroke, CKD, and CAD",
+    "version": "1.0.0",
+    "citation_notice": "All relative_risk_multiplier values are initial placeholders tagged for clinical literature review."
+  },
+  "nodes": ["gdm", "preeclampsia", "stroke", "ckd", "cad"],
+  "edges": [
+    {
+      "source": "gdm",
+      "target": "cad",
+      "mechanism": "metabolic syndrome / insulin resistance pathway",
+      "relative_risk_multiplier": 1.25,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "gdm",
+      "target": "ckd",
+      "mechanism": "hyperglycemic renal vascular damage pathway",
+      "relative_risk_multiplier": 1.20,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "preeclampsia",
+      "target": "cad",
+      "mechanism": "endothelial dysfunction / vascular damage",
+      "relative_risk_multiplier": 1.30,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "preeclampsia",
+      "target": "stroke",
+      "mechanism": "cerebrovascular endothelial damage & acute hypertension",
+      "relative_risk_multiplier": 1.35,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "preeclampsia",
+      "target": "ckd",
+      "mechanism": "post-partum renal microvascular injury",
+      "relative_risk_multiplier": 1.25,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "ckd",
+      "target": "cad",
+      "mechanism": "cardiorenal syndrome type 4 (uropathic vascular calcification)",
+      "relative_risk_multiplier": 1.40,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "cad",
+      "target": "ckd",
+      "mechanism": "cardiorenal syndrome type 1/2 (reduced renal perfusion)",
+      "relative_risk_multiplier": 1.35,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "cad",
+      "target": "stroke",
+      "mechanism": "shared atherosclerotic vascular risk & thromboembolism",
+      "relative_risk_multiplier": 1.40,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "stroke",
+      "target": "cad",
+      "mechanism": "shared systemic atherothrombotic vascular disease",
+      "relative_risk_multiplier": 1.30,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "gdm",
+      "target": "preeclampsia",
+      "mechanism": "shared pregnancy-related metabolic/vascular risk factors",
+      "relative_risk_multiplier": 1.25,
+      "citation_status": "TODO: needs clinical literature citation"
+    },
+    {
+      "source": "preeclampsia",
+      "target": "gdm",
+      "mechanism": "shared gestational placental-metabolic stress",
+      "relative_risk_multiplier": 1.20,
+      "citation_status": "TODO: needs clinical literature citation"
+    }
+  ]
+}
