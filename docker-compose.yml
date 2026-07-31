@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: medq_backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./backend:/app
+
+  db:
+    image: postgres:16
+    container_name: medq_db
+    environment:
+      POSTGRES_USER: medq
+      POSTGRES_PASSWORD: medq_pass
+      POSTGRES_DB: medq_ai
+    ports:
+      - "5432:5432"
+    volumes:
+      - medq_pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: medq_redis
+    ports:
+      - "6379:6379"
+
+  frontend:
+    build: ./frontend
+    container_name: medq_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+
+volumes:
+  medq_pgdata:
