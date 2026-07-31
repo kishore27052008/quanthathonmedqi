@@ -1,0 +1,48 @@
+# Implementation Plan - MedQ AI Frontend Redesign & Full Requirements Implementation
+
+Build a fully functional, production-quality React frontend for the MedQ AI clinical risk prediction platform matching all user requirements, design system guidelines, multi-domain schema architecture, auth layout, app shell, and REST API contract.
+
+## Proposed Changes
+
+### Configuration & Design System Setup
+- Configure `tailwind.config.js` and `src/index.css` with custom theme colors (`primary: #5B4FE9`, `bg: #F6F5FB`, `risk-high: #F04452`, `risk-medium: #F5A623`, `risk-low: #2FBF71`).
+
+### Core Infrastructure & State
+- **`src/api/client.js`**: Axios instance with baseURL `/api/v1` and dynamic Bearer JWT header interceptor from `localStorage`.
+- **`src/context/AuthContext.jsx`**: Provides auth state (`user`, `token`), `login`, `register`, `logout`, and auto profile fetch `/auth/me`.
+- **`src/context/DomainContext.jsx`**: Manages active domain (defaulting to `pregnancy_fetal_sepsis`), domain schemas for all 6 clinical domains, and dynamic form configurations.
+
+### Components
+- **`src/components/Sidebar.jsx`**: Persistent navy/indigo sidebar with domain switcher, navigation links (Dashboard, Predict Risk, Patients, Prediction History, Analytics, Profile, Settings), and Logout button.
+- **`src/components/TopBar.jsx`**: Top header with breadcrumbs, notification bell icon, and user profile chip.
+- **`src/components/AppShell.jsx`**: Layout shell for authenticated pages.
+- **`src/components/RiskBadge.jsx`**: Reusable pill badge for Low, Medium/Moderate, and High risk.
+
+### Pages Implementation
+1. **Auth (`/login` / `/register`)**:
+   - Split-screen layout (55% branded left panel with 3 feature callouts, right panel with login/register form).
+2. **Dashboard (`/dashboard`)**:
+   - 4 stat cards (Total, High, Medium, Low) with trends.
+   - Recent predictions card (60% width) with patient info & risk badge.
+   - Risk distribution donut chart (40% width) using `recharts`.
+3. **Predict Risk (`/predict`)**:
+   - Schema-driven intake form (Basic Information + Clinical Parameters).
+   - Dynamic auto-calculated derived fields (e.g., BMI).
+   - Domain selector and patient pre-fill support.
+4. **Prediction Result (`/predict/result`)**:
+   - 3-column layout: Risk Level card (badge, probability %, visual bar), Patient Summary card, Key Risk Factors card (SHAP feature contribution horizontal bars).
+   - Highlighted recommendation banner colored by risk level.
+   - Clinical disclaimer note and stubbed "Download Report" action.
+5. **Prediction History (`/history`)**:
+   - Filter bar (Date range, Risk Level dropdown, Patient ID/Name search).
+   - Data table with Patient ID, Name, Timestamp, Domain Key Identifier, Risk Badge, Probability %, and Actions.
+6. **Reports & Analytics (`/analytics`)**:
+   - Date range selector, 4 summary stat cards, Multi-line Risk Trend chart over time, and Overall Risk Distribution donut chart.
+7. **Patients (`/patients`)**:
+   - Patient directory table with "Register Patient" modal/form and "Predict Risk" direct action for selected patient.
+8. **Profile & Settings (`/profile`, `/settings`)**:
+   - Clean minimal profile view/edit form and application settings preferences.
+
+## Verification Plan
+- Build check: `npm run build` inside `frontend/` to ensure no syntax/type errors.
+- Test routing, auth guards, and UI responsiveness.

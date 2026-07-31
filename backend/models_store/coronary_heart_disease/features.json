@@ -1,0 +1,10 @@
+[
+  "age",
+  "cholesterol",
+  "systolic_bp",
+  "diastolic_bp",
+  "smoking",
+  "diabetes",
+  "bmi",
+  "resting_heart_rate"
+]
