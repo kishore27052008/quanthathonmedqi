@@ -28,13 +28,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from app.api.v1.endpoints.predict import router as predict_router
+from app.ml.model_loader import preload_models
+
 app.include_router(api_router, prefix="/api/v1")
+app.include_router(predict_router)
 
 
 @app.on_event("startup")
 def on_startup():
     # Dev convenience: auto-create tables if they don't exist yet.
     Base.metadata.create_all(bind=engine)
+
+    # Preload AI models into memory once at startup
+    preload_models()
+
     try:
         from scripts.seed_demo_data import run as seed_run
         seed_run()

@@ -10,10 +10,12 @@ from app.api.v1.endpoints import (
     chronic_kidney_disease,
     gestational_diabetes,
     preeclampsia,
+    predict,
 )
 
 api_router = APIRouter()
 
+api_router.include_router(predict.router)
 api_router.include_router(auth.router)
 api_router.include_router(patients.router)
 api_router.include_router(dashboard.router)

@@ -69,14 +69,14 @@ export default function PredictionHistory() {
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Prediction History</h1>
-        <p className="text-xs text-slate-500 font-medium mt-1">
+        <h1 className="text-2xl font-extrabold text-white tracking-tight">Prediction History</h1>
+        <p className="text-xs text-slate-400 font-medium mt-1">
           Historical log of clinical assessments for {activeDomain.name}
         </p>
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-[#0F172A] rounded-2xl p-4 border border-slate-800/80 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex flex-1 items-center gap-3 w-full md:w-auto">
           {/* Search Input */}
           <div className="relative flex-1">
@@ -86,7 +86,7 @@ export default function PredictionHistory() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by Patient ID or Name..."
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-brand-500"
+              className="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-brand-500 placeholder:text-slate-500"
             />
           </div>
 
@@ -95,7 +95,7 @@ export default function PredictionHistory() {
             <select
               value={riskFilter}
               onChange={(e) => setRiskFilter(e.target.value)}
-              className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:border-brand-500 cursor-pointer"
+              className="px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs font-semibold text-slate-200 focus:outline-none focus:border-brand-500 cursor-pointer"
             >
               <option value="All">All Risk Levels</option>
               <option value="High">High Risk</option>
@@ -107,20 +107,20 @@ export default function PredictionHistory() {
 
         {/* Date Filters */}
         <div className="flex items-center gap-2 w-full md:w-auto">
-          <div className="flex items-center gap-1.5 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600">
-            <Calendar className="w-3.5 h-3.5 text-slate-400" />
+          <div className="flex items-center gap-1.5 px-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-300">
+            <Calendar className="w-3.5 h-3.5 text-slate-500" />
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="bg-transparent focus:outline-none"
+              className="bg-transparent focus:outline-none text-white"
             />
             <span>to</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="bg-transparent focus:outline-none"
+              className="bg-transparent focus:outline-none text-white"
             />
           </div>
 
@@ -134,7 +134,7 @@ export default function PredictionHistory() {
       </div>
 
       {/* Results Table */}
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+      <div className="bg-[#0F172A] rounded-2xl border border-slate-800/80 shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-12 text-center text-xs text-slate-400">Loading history records...</div>
         ) : filteredHistory.length === 0 ? (
@@ -143,7 +143,7 @@ export default function PredictionHistory() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50/80 border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                <tr className="bg-slate-900 border-b border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-400">
                   <th className="py-3.5 px-6">Patient ID</th>
                   <th className="py-3.5 px-6">Patient Name</th>
                   <th className="py-3.5 px-6">Date & Time</th>
@@ -153,38 +153,31 @@ export default function PredictionHistory() {
                   <th className="py-3.5 px-6 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-xs font-medium">
+              <tbody className="divide-y divide-slate-800 text-xs font-medium">
                 {filteredHistory.map((item, idx) => (
-                  <tr key={item.id || idx} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-4 px-6 font-mono font-bold text-slate-900">{item.patient_mrn || item.patient_id}</td>
-                    <td className="py-4 px-6 text-slate-900 font-semibold">{item.patient_name || `Patient #${item.patient_id}`}</td>
-                    <td className="py-4 px-6 text-slate-500">
+                  <tr key={item.id || idx} className="hover:bg-slate-800/50 transition-colors">
+                    <td className="py-4 px-6 font-mono font-bold text-white">{item.patient_mrn || item.patient_id}</td>
+                    <td className="py-4 px-6 text-white font-semibold">{item.patient_name || `Patient #${item.patient_id}`}</td>
+                    <td className="py-4 px-6 text-slate-400">
                       {new Date(item.created_at || Date.now()).toLocaleString()}
                     </td>
-                    <td className="py-4 px-6 text-slate-700">
+                    <td className="py-4 px-6 text-slate-300">
                       {activeDomain.getKeyMetric(item.basicInfo || item.raw_input || {})}
                     </td>
                     <td className="py-4 px-6">
                       <RiskBadge level={item.risk_level} />
                     </td>
-                    <td className="py-4 px-6 font-mono font-bold text-slate-900">
-                      {Math.round(item.risk_score || 0)}%
+                    <td className="py-4 px-6 font-mono font-bold text-white">
+                      {Math.round(item.risk_score || (item.probability ? item.probability * 100 : 0))}%
                     </td>
                     <td className="py-4 px-6 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => handleViewItem(item)}
-                          className="p-2 text-slate-400 hover:text-brand-500 hover:bg-brand-50 rounded-lg transition-all"
-                          title="View Full Report"
+                          className="p-2 text-slate-400 hover:text-brand-400 hover:bg-slate-800 rounded-lg transition-all"
+                          title="View Full Assessment"
                         >
                           <Eye className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDownloadItem(item)}
-                          className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-all"
-                          title="Download Report"
-                        >
-                          <Download className="w-4 h-4" />
                         </button>
                       </div>
                     </td>

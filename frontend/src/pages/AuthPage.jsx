@@ -58,12 +58,12 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex bg-surface-bg font-sans">
+    <div className="min-h-screen w-full flex bg-black font-sans">
       {/* Left Panel (~55%) */}
-      <div className="hidden lg:flex lg:w-[55%] bg-gradient-to-br from-[#071D2B] via-[#0F172A] to-[#0284C7] text-white p-12 flex-col justify-between relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-[55%] bg-gradient-to-br from-[#050811] via-[#0B0F17] to-[#0F172A] text-white p-12 flex-col justify-between relative overflow-hidden border-r border-slate-800/80">
         {/* Subtle Background Glow */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-sky-400/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-cyan-400/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Top Logo Header */}
         <div className="flex items-center gap-3.5 z-10">
@@ -72,40 +72,40 @@ export default function AuthPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold tracking-tight text-white">MedQ AI</h1>
-            <p className="text-xs text-brand-100 font-medium tracking-wide uppercase">Clinical Intelligence Platform</p>
+            <p className="text-xs text-brand-300 font-medium tracking-wide uppercase">Clinical Intelligence Platform</p>
           </div>
         </div>
 
         {/* Main Headline & Hero Illustration Graphic */}
         <div className="my-auto z-10 max-w-xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-brand-100 text-xs font-semibold backdrop-blur-md mb-6 border border-white/10">
-            <Cpu className="w-3.5 h-3.5 text-brand-500" /> Next-Gen Diagnostic Decision Support
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 text-brand-300 text-xs font-semibold backdrop-blur-md mb-6 border border-slate-800">
+            <Cpu className="w-3.5 h-3.5 text-brand-400" /> Next-Gen Diagnostic Decision Support
           </div>
           <h2 className="text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-white mb-4">
-            AI-Powered Risk Prediction for a <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-200 to-cyan-300">Healthier Tomorrow</span>
+            AI-Powered Risk Prediction for a <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-brand-300">Healthier Tomorrow</span>
           </h2>
-          <p className="text-slate-300 text-base leading-relaxed mb-8">
+          <p className="text-slate-400 text-base leading-relaxed mb-8">
             Empowering maternal and multidisciplinary clinical teams with real-time risk stratification, explainable SHAP diagnostics, and quantum-optimized risk engines.
           </p>
 
           {/* Graphic Mockup Badge Card */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/15 shadow-2xl flex items-center gap-5">
-            <div className="w-14 h-14 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/30">
+          <div className="bg-slate-900/80 backdrop-blur-md rounded-2xl p-5 border border-slate-800 shadow-2xl flex items-center gap-5">
+            <div className="w-14 h-14 rounded-xl bg-emerald-950/80 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-800">
               <ShieldCheck className="w-8 h-8" />
             </div>
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-1">Live Clinical Model</p>
               <h4 className="text-sm font-semibold text-white">99.4% Multi-Domain Prediction Accuracy</h4>
-              <p className="text-xs text-slate-300">Fully validated across pregnancy sepsis, stroke, and cardiovascular risk domains.</p>
+              <p className="text-xs text-slate-400">Fully validated across pregnancy sepsis, stroke, and cardiovascular risk domains.</p>
             </div>
           </div>
         </div>
 
         {/* 3 Feature Callouts */}
-        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 z-10">
+        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 z-10">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-brand-100">
-              <Cpu className="w-5 h-5 text-brand-500" />
+            <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-brand-400">
+              <Cpu className="w-5 h-5" />
             </div>
             <div>
               <h5 className="text-xs font-bold text-white">AI Predictions</h5>
@@ -114,8 +114,8 @@ export default function AuthPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-brand-100">
-              <Activity className="w-5 h-5 text-purple-400" />
+            <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-purple-400">
+              <Activity className="w-5 h-5" />
             </div>
             <div>
               <h5 className="text-xs font-bold text-white">Quantum Enhanced</h5>
@@ -124,8 +124,8 @@ export default function AuthPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-brand-100">
-              <ShieldCheck className="w-5 h-5 text-emerald-400" />
+            <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-emerald-400">
+              <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
               <h5 className="text-xs font-bold text-white">Secure & Private</h5>
@@ -136,13 +136,13 @@ export default function AuthPage() {
       </div>
 
       {/* Right Panel (~45%) Form Card */}
-      <div className="w-full lg:w-[45%] flex items-center justify-center p-8 lg:p-12">
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-8 border border-slate-100">
+      <div className="w-full lg:w-[45%] flex items-center justify-center p-8 lg:p-12 bg-black">
+        <div className="w-full max-w-md bg-[#0F172A] rounded-2xl shadow-2xl p-8 border border-slate-800">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+            <h3 className="text-2xl font-bold text-white tracking-tight">
               {isRegister ? 'Create Your Account' : 'Welcome Back'}
             </h3>
-            <p className="text-xs text-slate-500 mt-1.5 font-medium">
+            <p className="text-xs text-slate-400 mt-1.5 font-medium">
               {isRegister
                 ? 'Register to access AI clinical risk prediction tools'
                 : 'Sign in with your clinical credentials to continue'}
@@ -150,7 +150,7 @@ export default function AuthPage() {
           </div>
 
           {error && (
-            <div className="mb-6 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-medium">
+            <div className="mb-6 p-3.5 rounded-xl bg-red-950/80 border border-red-800 text-red-300 text-xs font-medium">
               {error}
             </div>
           )}
@@ -158,58 +158,58 @@ export default function AuthPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {isRegister && (
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                   Full Name & Title
                 </label>
                 <div className="relative">
-                  <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                  <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
                   <input
                     type="text"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Dr. Sarah Johnson"
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition-all font-medium"
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-brand-500 transition-all font-medium placeholder:text-slate-600"
                   />
                 </div>
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                 Work Email Address
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="doctor@hospital.org"
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition-all font-medium"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-brand-500 transition-all font-medium placeholder:text-slate-600"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition-all font-medium"
+                  className="w-full pl-10 pr-10 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-brand-500 transition-all font-medium placeholder:text-slate-600"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-3.5 text-slate-400 hover:text-slate-600"
+                  className="absolute right-3.5 top-3.5 text-slate-500 hover:text-slate-300"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -219,24 +219,24 @@ export default function AuthPage() {
             {isRegister && (
               <>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                     Confirm Password
                   </label>
                   <div className="relative">
-                    <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                    <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3.5" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       required
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition-all font-medium"
+                      className="w-full pl-10 pr-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-brand-500 transition-all font-medium placeholder:text-slate-600"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                     Clinical Role
                   </label>
                   <input
@@ -244,7 +244,7 @@ export default function AuthPage() {
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
                     placeholder="Obstetrician / Cardiologist"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-brand-500 focus:bg-white transition-all font-medium"
+                    className="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-brand-500 transition-all font-medium placeholder:text-slate-600"
                   />
                 </div>
               </>
@@ -252,11 +252,11 @@ export default function AuthPage() {
 
             {!isRegister && (
               <div className="flex items-center justify-between py-1 text-xs">
-                <label className="flex items-center gap-2 cursor-pointer text-slate-600 font-medium">
-                  <input type="checkbox" defaultChecked className="rounded border-slate-300 text-brand-500 focus:ring-brand-500" />
+                <label className="flex items-center gap-2 cursor-pointer text-slate-400 font-medium">
+                  <input type="checkbox" defaultChecked className="rounded border-slate-800 bg-slate-900 text-brand-500 focus:ring-brand-500" />
                   Remember me
                 </label>
-                <a href="#forgot" onClick={(e) => { e.preventDefault(); alert('Please contact system administrator to reset password.'); }} className="text-brand-500 hover:underline font-semibold">
+                <a href="#forgot" onClick={(e) => { e.preventDefault(); alert('Please contact system administrator to reset password.'); }} className="text-brand-400 hover:underline font-semibold">
                   Forgot Password?
                 </a>
               </div>
@@ -278,7 +278,7 @@ export default function AuthPage() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-xs text-slate-500 font-medium">
+          <div className="mt-6 text-center text-xs text-slate-400 font-medium">
             {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
             <button
               type="button"
@@ -286,7 +286,7 @@ export default function AuthPage() {
                 setIsRegister(!isRegister);
                 setError('');
               }}
-              className="text-brand-500 font-bold hover:underline ml-1"
+              className="text-brand-400 font-bold hover:underline ml-1"
             >
               {isRegister ? 'Sign In' : 'Sign up'}
             </button>

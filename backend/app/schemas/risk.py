@@ -5,8 +5,15 @@ from pydantic import BaseModel
 
 class RiskRequestBase(BaseModel):
     """Generic clinical input payload."""
-    patient_id: Union[int, str]
+    patient_id: Union[int, str] = 1
     features: Dict[str, Any]
+
+
+class SimplePredictionResponse(BaseModel):
+    prediction: int
+    probability: float
+    risk_level: str
+    message: str = "Prediction completed successfully"
 
 
 class RiskResponse(BaseModel):
@@ -17,6 +24,9 @@ class RiskResponse(BaseModel):
     domain: str
     risk_score: float
     risk_level: str
+    prediction: Optional[int] = 0
+    probability: Optional[float] = 0.0
+    message: Optional[str] = "Prediction completed successfully"
     model_version: Optional[str] = None
     shap_explanation: Optional[Dict[str, Any]] = None
     quantum_optimized: Optional[Union[Dict[str, Any], bool]] = None

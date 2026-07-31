@@ -27,7 +27,6 @@ export default function Sidebar() {
     { name: 'Patients', path: '/patients', icon: Users },
     { name: 'Prediction History', path: '/history', icon: History },
     { name: 'Analytics', path: '/analytics', icon: BarChart3 },
-    { name: 'Reports', path: '/analytics', icon: FileText },
     { name: 'Profile', path: '/profile', icon: User },
     { name: 'Settings', path: '/settings', icon: Settings },
   ];
@@ -38,7 +37,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 bg-[#0F172A] text-slate-300 flex flex-col h-screen sticky top-0 shrink-0 border-r border-slate-800">
+    <aside className="w-64 bg-[#050811] text-slate-300 flex flex-col h-screen sticky top-0 shrink-0 border-r border-slate-800/80">
       {/* Brand Header */}
       <div className="p-5 flex items-center gap-3 border-b border-slate-800/80">
         <div className="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30">

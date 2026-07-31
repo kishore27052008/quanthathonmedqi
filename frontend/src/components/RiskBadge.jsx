@@ -3,17 +3,17 @@ import React from 'react';
 export default function RiskBadge({ level, score, showScore = false, className = '' }) {
   const normLevel = (level || 'low').toLowerCase();
 
-  let styles = 'bg-emerald-50 text-emerald-700 border-emerald-200';
-  let dotColor = 'bg-emerald-500';
+  let styles = 'bg-emerald-950/80 text-emerald-300 border-emerald-800';
+  let dotColor = 'bg-emerald-400';
   let label = 'Low Risk';
 
-  if (normLevel === 'high') {
-    styles = 'bg-red-50 text-red-700 border-red-200';
+  if (normLevel === 'high' || normLevel === 'high risk') {
+    styles = 'bg-red-950/80 text-red-300 border-red-800';
     dotColor = 'bg-red-500';
     label = 'High Risk';
-  } else if (normLevel === 'medium' || normLevel === 'moderate') {
-    styles = 'bg-amber-50 text-amber-700 border-amber-200';
-    dotColor = 'bg-amber-500';
+  } else if (normLevel === 'medium' || normLevel === 'moderate' || normLevel === 'moderate risk') {
+    styles = 'bg-amber-950/80 text-amber-300 border-amber-800';
+    dotColor = 'bg-amber-400';
     label = 'Medium Risk';
   }
 
