@@ -33,10 +33,22 @@ export default function Dashboard() {
         setOverallAnalysis(overallRes.data);
       }
 
-      // Fetch recent high risk assessments / history
-      const historyRes = await api.get(`/${activeDomain.id}/history/all`).catch(async () => {
-        return api.get('/dashboard/high-risk-patients').catch(() => ({ data: [] }));
-      });
+      // Fetch recent risk assessments / history
+      let historyData = [];
+      const domainHistory = await api.get(`/${activeDomain.id}/history/all`).catch(() => null);
+      if (domainHistory?.data && Array.isArray(domainHistory.data) && domainHistory.data.length > 0) {
+        historyData = domainHistory.data;
+      } else {
+        const fullHistory = await api.get('/history').catch(() => null);
+        if (fullHistory?.data && Array.isArray(fullHistory.data)) {
+          historyData = fullHistory.data;
+        } else {
+          const highRisk = await api.get('/dashboard/high-risk-patients').catch(() => null);
+          if (highRisk?.data && Array.isArray(highRisk.data)) {
+            historyData = highRisk.data;
+          }
+        }
+      }
 
       if (summaryRes?.data && summaryRes.data[activeDomain.id]) {
         setSummary(summaryRes.data[activeDomain.id]);
@@ -53,11 +65,7 @@ export default function Dashboard() {
         setSummary({ low: 0, moderate: 0, high: 0 });
       }
 
-      if (historyRes?.data && Array.isArray(historyRes.data)) {
-        setRecentAssessments(historyRes.data.slice(0, 6));
-      } else {
-        setRecentAssessments([]);
-      }
+      setRecentAssessments(historyData.slice(0, 6));
     } catch (err) {
       console.error('Error fetching dashboard summary:', err);
     } finally {
